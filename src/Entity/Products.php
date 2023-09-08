@@ -18,7 +18,7 @@ class Products
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[ORM\Column(type: 'string',length: 200,unique: true)]
+    #[ORM\Column(type: 'string',length: 160,unique: true)]
     private ?string $slug = null;
 
     #[ORM\Column(length: 255)]
