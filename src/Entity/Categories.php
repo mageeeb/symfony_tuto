@@ -6,6 +6,7 @@ use App\Repository\CategoriesRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Cocur\Slugify\Slugify;
 
 #[ORM\Entity(repositoryClass: CategoriesRepository::class)]
 class Categories
@@ -50,9 +51,24 @@ class Categories
         return $this;
     }
 
+
     public function getParent(): ?self
     {
         return $this->parent;
+    }
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    /**
+     * @param string|null $slug
+     * @return Products
+     */
+    public function setSlug(?string $slug): Categories
+    {
+        $this->slug = $slug;
+        return $this;
     }
 
     public function setParent(?self $parent): static
@@ -61,6 +77,7 @@ class Categories
 
         return $this;
     }
+
 
     /**
      * @return Collection<int, self>
@@ -124,4 +141,6 @@ class Categories
     public function __toString(){
         return $this->getName();
     }
+
+
 }

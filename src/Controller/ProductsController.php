@@ -62,7 +62,6 @@ class ProductsController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $slug = new Slugify();
-            $product->setSlug($slug->slugify($product->getName()));
             $entityManager->flush();
 
             return $this->redirectToRoute('app_products_index', [], Response::HTTP_SEE_OTHER);
