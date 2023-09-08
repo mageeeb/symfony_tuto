@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-use App\Entity\Trait\CreatedAtTrait;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -15,7 +14,6 @@ use Symfony\Component\Security\Core\User\UserInterface;
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
-    use CreatedAtTrait;
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -190,7 +188,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    public function getCreatAt(): ?\DateTimeImmutable
+    {
+        return $this->creat_at;
+    }
 
+    public function setCreatAt(\DateTimeImmutable $creat_at): static
+    {
+        $this->creat_at = $creat_at;
+
+        return $this;
+    }
 
     /**
      * @return Collection<int, Orders>

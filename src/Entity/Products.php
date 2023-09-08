@@ -18,6 +18,9 @@ class Products
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
+    #[ORM\Column(type: 'string',length: 200,unique: true)]
+    private ?string $slug = null;
+
     #[ORM\Column(length: 255)]
     private ?string $description = null;
 
@@ -44,7 +47,7 @@ class Products
     {
         $this->images = new ArrayCollection();
         $this->orderDetails = new ArrayCollection();
-        $this->created_at = new \DateTimeImmutable();
+
     }
 
     public function getId(): ?int
@@ -111,6 +114,26 @@ class Products
 
         return $this;
     }
+
+    /**
+     * @return string|null
+     */
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    /**
+     * @param string|null $slug
+     * @return Products
+     */
+    public function setSlug(?string $slug): Products
+    {
+        $this->slug = $slug;
+        return $this;
+    }
+
+
 
     public function getCategories(): ?Categories
     {
