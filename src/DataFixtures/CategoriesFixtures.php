@@ -10,20 +10,25 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 class CategoriesFixtures extends Fixture
 {
     //cela crée un "slug nous permetant de l'utiliser
-    public function __construct(private SluggerInterface $slugger)
-    {
-    }
+    public function __construct(private SluggerInterface $slugger){}
 
     public function load(ObjectManager $manager): void
     {
-
-
-        $user = new Utilisateur();
-        $user->setName('Dupont');
-        $user->setEmail('dupont@dupont.com');
-        $password = $this->passwordEncoder->hashPassword($user,'123456');
-        $user->setPassword($password);
-
+        $parent = $this->creatCategories('informatique', null, $manager);
+        $this->creatCategories('Ecran pc',$parent,$manager);
+        $this->creatCategories('souris',$parent,$manager);
+        $this->creatCategories('Clavier',$parent,$manager);
+        $this->creatCategories('Unité central',$parent,$manager);
+        $this->creatCategories('Cable HDMI',$parent,$manager);
         $manager->flush();
+    }
+    public function creatCategories(string $name , categories $parent=null, objectManager $manager){
+        $category = new Categories();
+        $category->setName($name);
+        $category->setSlug($this->slugger->slug($category->getName()));
+        $category->setParent($parent);
+        $manager->persist($category);
+
+        return $category;
     }
 }

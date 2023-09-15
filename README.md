@@ -27,3 +27,13 @@
 -----------------------------
 ### "php bin/console make"
 #### nous permet de voire tout les make dispo
+
+-----------------------------------
+### les "Datafixtures" pour remplire la DB
+#### "symfony console d:f:l" ou "symfony console doctrine:fixture:load"
+#### c'est pour charger les 'fixtures' 
+#### mettre "--no-interacton" (il faut etre sur), pour ne pas à chaque fois mettre yes pour charger les 'fixtures'
+
+--------------------------------------
+### le "#[ORM\JoinColumn(onDelete: 'cascade')]"
+####permet dans la relation (le 'ON DELETE' sur phpmyadmin )de le mettre en 'CASCADE' pour qu'on puisse suppimer direct dans la table
